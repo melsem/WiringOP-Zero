@@ -29,7 +29,7 @@ CC	= gcc
 INCLUDE	= -I/usr/local/include
 CFLAGS	= $(DEBUG) -Wall $(INCLUDE) -Winline -pipe
 
-LDFLAGS	= -L/usr/local/lib
+LDFLAGS	= -L/usr/local/lib -L../wiringPi -L../devLib
 LDLIBS    = -lwiringPi -lwiringPiDev -lpthread -lm
 
 # Should not alter anything below this line
@@ -43,7 +43,7 @@ SRC	=	blink.c blink8.c blink12.c					\
 		nes.c								\
 		softPwm.c softTone.c 						\
 		delayTest.c serialRead.c serialTest.c okLed.c ds1302.c		\
-		rht03.c piglow.c
+		rht03.c piglow.c 7segments.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -55,6 +55,10 @@ all:
 	@echo ""
 
 really-all:	$(BINS)
+
+7segments:	7segments.o
+	@echo [link]
+	@$(CC) -o $@ 7segments.o $(LDFLAGS) $(LDLIBS)
 
 blink:	blink.o
 	@echo [link]

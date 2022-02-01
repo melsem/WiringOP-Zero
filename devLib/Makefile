@@ -21,7 +21,7 @@
 #################################################################################
 
 DYN_VERS_MAJ=2
-DYN_VERS_MIN=0
+DYN_VERS_MIN=6
 
 VERSION=$(DYN_VERS_MAJ).$(DYN_VERS_MIN)
 DESTDIR=/usr

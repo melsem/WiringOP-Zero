@@ -29,7 +29,7 @@ CC	= gcc
 INCLUDE	= -I/usr/local/include
 CFLAGS	= $(DEBUG) -Wall $(INCLUDE) -Winline -pipe
 
-LDFLAGS	= -L/usr/local/lib
+LDFLAGS	= -L/usr/local/lib -L../wiringPi -L../devLib
 LDLIBS    = -lwiringPi -lwiringPiDev -lpthread -lm
 
 # Should not alter anything below this line
