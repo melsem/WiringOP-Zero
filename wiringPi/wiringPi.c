@@ -302,17 +302,6 @@ static pthread_mutex_t pinMutex ;
 int wiringPiDebug       = FALSE; 
 int wiringPiReturnCodes = FALSE ;
 
-// sysFds:
-//	Map a file descriptor from the /sys/class/gpio/gpioX/value
-
-static int sysFds [384] =
-{
-  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-} ;
-
 // ISR Data
 
 static void (*isrFunctions [64])(void) ;
@@ -2099,10 +2088,10 @@ int digitalRead (int pin)
 					sprintf(fName, "/sys/class/gpio/gpio%d/value", pin);
 					if(sysFds[pin] == -1){
 						if ((sysFds[pin] = open (fName, O_RDWR)) < 0){
-							printf("digitalRead(): Failed to open %s, pin not exported?\n", fName);
-							return LOW;
-							}
+						//	printf("digitalRead(): Failed to open %s, pin not exported?\n", fName);
+							return 0;	//return printf("");
 						}
+					}
 					lseek(sysFds[pin], 0L, SEEK_SET);
 					read(sysFds[pin], &c, 1);
 					return (c == '0') ? LOW : HIGH;
